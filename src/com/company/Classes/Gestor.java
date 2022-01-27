@@ -1,8 +1,6 @@
 package com.company.Classes;
-import com.company.Models.LocalX;
 import com.company.Models.Vendedor;
 import com.company.Estruturas.ArrayUnorderedList;
-import com.company.Estruturas.Network;
 import java.util.Scanner;
 import static java.lang.Long.valueOf;
 
@@ -19,7 +17,7 @@ public class Gestor {
     public Integer changeUser() {
         Scanner input = new Scanner(System.in);
         String choice1;
-        System.out.println("Qual utilizador quer alterar?");
+        System.out.println("Escolha um vendedor:");
         System.out.println("-------------------------\n");
         printSellers();
         choice1 = input.next();
@@ -40,21 +38,15 @@ public class Gestor {
         }
     }
 
-    public void printLocals(Network<LocalX> network){
-      Network<LocalX> locais = network;
-        for (int i= 0; i < network.size(); i++){
-            System.out.println(network.getVertex(i));
-        }
-    }
-
     public Integer changeAtribute() {
         Scanner input = new Scanner(System.in);
         String choice1;
-        System.out.println("Qual atributo quer alterar?");
+        System.out.println("O que pretende fazer?");
         System.out.println("-------------------------\n");
-        System.out.println("1-Nome");
-        System.out.println("2-Capacidade");
-        System.out.println("3-Sair");
+        System.out.println("1-Alterar Nome");
+        System.out.println("2-Alterar capacidade");
+        System.out.println("3-Atribuir lista de mercados");
+        System.out.println("4-Sair ");
         choice1 = input.next();
         return Integer.valueOf(choice1);
     }
@@ -76,6 +68,27 @@ public class Gestor {
     }
 
 
+    public ArrayUnorderedList<String> atribuirLista(){
+      ArrayUnorderedList<String> mercados = new ArrayUnorderedList<>();
+      int choice1;
+      String choice;
 
+      System.out.println("1- Adicionar mercado á lista");
+      System.out.println("2- Não adicionar mais");
+      Scanner input2 = new Scanner(System.in);
+      choice1 = Integer.parseInt(input2.next());
 
+      while(choice1 != 2){
+          System.out.println("Mercado:");
+          Scanner input1 = new Scanner(System.in);
+          choice = String.valueOf(input1.next());
+          mercados.addToRear(choice);
+          System.out.println("Continuar adicionar - 1");
+          System.out.println("Não continuar - 2");
+          input2.hasNext();
+          choice1 = input2.nextInt();
+      }
+
+      return mercados;
+    }
 }

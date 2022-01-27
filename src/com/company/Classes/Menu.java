@@ -10,18 +10,23 @@ import java.util.Scanner;
 
 public class Menu {
     private String docFileName = null;
-    private GestaoEmpresa gestaoEmpresa = new GestaoEmpresa();
-    private Gestor gestor = new Gestor(gestaoEmpresa.getVendedors());
+    private GestaoEmpresa gestaoEmpresa;
+    private Gestor gestor;
     private Writter writter;
+    private GestaoVendedores gestaoVendedores;
 
-    public Menu() { }
+    public Menu() {
+        this.gestaoEmpresa = new GestaoEmpresa();
+        this.gestor = new Gestor(gestaoEmpresa.getVendedors());
+        this.writter = new Writter(gestaoEmpresa);
+        this.gestaoVendedores = new GestaoVendedores(gestaoEmpresa);
+    }
 
     public void run() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
         int choice = 0;
         System.out.println("Welcome!");
         while (choice != 15) {
             choice = initialMenu();
-
             switch (choice) {
                 case 1:
                     isDocRead();
@@ -34,13 +39,13 @@ public class Menu {
                     gestor.printSellersToShow();
                     break;
                 case 4:
-                    gestaoEmpresa.changeSeller();
+                    gestaoVendedores.changeSeller();
                     break;
                 case 5:
-                    exports();
+                    writter.exports();
                     break;
                 case 6:
-                    gestaoEmpresa.addSeller();
+                    gestaoVendedores.addSeller();
                     break;
                 case 7:
                     printGraph();
@@ -53,8 +58,10 @@ public class Menu {
                     break;
                 case 10:
                     seeMarketsOrStorages();
+                    break;
                 case 11:
                     gestaoEmpresa.addEdge();
+                    break;
                 default:
             }
         }
@@ -104,11 +111,11 @@ public class Menu {
             System.out.println("1 - Importar documento"); //funcional!!
             System.out.println("2 - Ver info da empresa"); //colocar grafo em vez de lista
             System.out.println("3 - Ver vendedores"); //funcional!!
-            System.out.println("4 - Atualizar vendedor"); //funcional!!
-            System.out.println("5 - Exports"); //funcional mas locais , storages e markets tem de ser separados e atraves da network
+            System.out.println("4 - Atualizar vendedor ou atribuir lista"); //funcional!!
+            System.out.println("5 - Exports"); //funcional vendedores, ver melhor empresa, storages e mercados
             System.out.println("6 - Adicionar vendedor"); //funcional!!
             System.out.println("7 - Mostrar Network"); // funcional!!
-            System.out.println("8 - Adicionar ou alterar armazém"); //funcional!! Colocar um toString melhor
+            System.out.println("8 - Adicionar ou alterar Armazém"); //funcional!! Colocar um toString melhor
             System.out.println("9 - Adicionar ou alterar mercado"); // funcional!! Colocar toString melhor + adicionar + clientes no adicionar
             System.out.println("10- Ver mercados ou armazéns");// funcional!!
             System.out.println("11- Adicionar caminho");
@@ -123,7 +130,6 @@ public class Menu {
         System.out.println("2- Armazens");
         Scanner input = new Scanner(System.in);
         choice = Integer.parseInt(input.next());
-
         while (choice != 3) {
             switch (choice) {
                 case 1:
@@ -139,73 +145,6 @@ public class Menu {
             }
         }
     }
-
-    public void exports() throws IOException {
-        int choice;
-
-        System.out.println("Qual item quer exportar?");
-        System.out.println("1- Empresa");
-        System.out.println("2- User");
-        System.out.println("3-Storage");
-        Scanner input = new Scanner(System.in);
-        choice = Integer.parseInt(input.next());
-        while (choice != 4) {
-            switch (choice) {
-                case 1:
-                    exportEnterprise();
-                    choice = 4;
-                    break;
-                case 2:
-                    exportUser();
-                    choice = 4;
-                    break;
-                case 3:
-                   // exportStorage();
-                    choice = 4;
-                    break;
-                default:
-                    return;
-            }
-        }
-    }
-
-    public void exportEnterprise() throws IOException {
-            Writter writter = new Writter();
-            writter.appendEnterprise(gestaoEmpresa);
-    }
-
-    public void exportUser() throws IOException {
-        int sellectStorage = 0;
-        Scanner input = new Scanner(System.in);
-        String choice;
-        System.out.println("Qual utilizador quer exportar?");
-        System.out.println("-------------------------\n");
-        gestor.printSellers();
-        ArrayUnorderedList<Vendedor> vendedores = gestaoEmpresa.getVendedors();
-        choice = input.next();
-        sellectStorage = Integer.valueOf(choice);
-        Vendedor vendedor = vendedores.getIndex(sellectStorage);
-        Writter writter = new Writter();
-        writter.appendPersonToFile(vendedor);
-    }
-
-    /*
-    public void exportStorage() throws IOException {
-            int sellectStorage = 0;
-            Scanner input = new Scanner(System.in);
-            String choice;
-
-            System.out.println("Qual local quer exportar?");
-            System.out.println("-------------------------\n");
-            gestor.printLocals();
-            ArrayUnorderedList<Local> locals = gestaoEmpresa.getLocais();
-
-            choice = input.next();
-            sellectStorage = Integer.valueOf(choice);
-            Local local = locals.getIndex(sellectStorage);
-            Writter writter = new Writter();
-            writter.appendStorage(local);
-        } */
 
     public void printGraph() throws EmptyException {
         Network<LocalX> network;

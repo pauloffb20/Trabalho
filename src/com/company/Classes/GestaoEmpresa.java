@@ -14,7 +14,7 @@ public class GestaoEmpresa<T> {
     private ArrayUnorderedList<Vendedor> vendedores;
     //private ArrayUnorderedList<Local> locais;
     private ArrayUnorderedList<Caminho> paths;
-    private Gestor gestor = new Gestor();
+    private Gestor gestor;
     private Network<LocalX> networkX;
 
     public GestaoEmpresa() {
@@ -46,7 +46,6 @@ public class GestaoEmpresa<T> {
     }
 
     public void readJson(String path) throws IOException, ParseException, NoComparableException {
-
         try (FileReader reader = new FileReader(ClassLoader.getSystemResource(path).getFile())) {
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
@@ -182,62 +181,6 @@ public class GestaoEmpresa<T> {
     public void addEdge(){
         GestaoCaminhos gestaoCaminhos = new GestaoCaminhos(networkX);
         networkX = gestaoCaminhos.addEdge();
-    }
-
-    public void addSeller() throws NoComparableException {
-        Vendedor vendedor;
-        String nome;
-        long id, capacidade;
-
-        System.out.println("ID:");
-        Scanner input3 = new Scanner(System.in);
-        id = Long.parseLong(input3.next());
-
-        System.out.println("Name:");
-        Scanner input = new Scanner(System.in);
-        nome = input.next();
-
-        System.out.println("Capacidade:");
-        Scanner input2 = new Scanner(System.in);
-        capacidade = Long.parseLong(input2.next());
-
-        ArrayUnorderedList<String> mercados = new ArrayUnorderedList<String>();
-        System.out.println("Adicionar mercado - 1");
-        System.out.println("Não adicionar - 2");
-        Scanner input5 = new Scanner(System.in);
-        int choice = input5.nextInt();
-
-        while(choice != 2){
-            System.out.println("Mercados:");
-            Scanner input4 = new Scanner(System.in);
-            String mercado = String.valueOf(input4.next());
-            mercados.addToRear(mercado);
-            System.out.println("Adicionar mercado - 1");
-            System.out.println("Não adicionar - 2");
-            input5.hasNext();
-            choice = input5.nextInt();
-        }
-        vendedor = new Vendedor(id, nome, capacidade, mercados);
-        addVendedor(vendedor);
-    }
-
-    public void changeSeller() throws IOException, InvalidIndexException, EmptyException, NotFoundException, java.text.ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
-        int sellectSeller = 0 , sellectAtribut = 0;
-        sellectSeller = gestor.changeUser();
-        sellectAtribut = gestor.changeAtribute();
-        switch (sellectAtribut) {
-            case 1:
-                Vendedor vendedor = vendedores.getIndex(sellectSeller);
-                String string = gestor.changeName();
-                vendedor.setNome(string);
-                break;
-            case 2:
-                Vendedor vendedor2 = vendedores.getIndex(sellectSeller);
-                long capacidade = gestor.changeCapacidade();
-                vendedor2.setCapacidade(capacidade);
-                break;
-            default:
-        }
     }
 
     public LocalX findLocalByName(String nome){

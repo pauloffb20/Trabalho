@@ -31,6 +31,14 @@ public class Vendedor {
         this.capacidade = capacidade;
     }
 
+    public ArrayUnorderedList<String> getMercados() {
+        return mercados;
+    }
+
+    public void setMercados(ArrayUnorderedList<String> mercados) {
+        this.mercados = mercados;
+    }
+
     @Override
     public String toString() {
         String s = "";

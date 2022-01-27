@@ -78,7 +78,7 @@ public class GestãoArmazem {
                     input3.hasNext();
                     choice3 = Integer.parseInt(input3.next());
 
-                    while (choice3 > armazem.getCapacidade()){
+                    while (choice3 > armazem.getCapacidade() || choice3 < 0){
                         System.out.println("Stock acima da capacidade! Defina um stock:");
                         Scanner input8 = new Scanner(System.in);
                         choice3 = Integer.parseInt(input8.nextLine());
@@ -112,7 +112,7 @@ public class GestãoArmazem {
         input7.hasNext();
         stock = Integer.parseInt(input7.next());
 
-        while (cap < stock){
+        while (cap < stock || stock < 0){
             System.out.println("Stock acima da capacidade! Defina um stock:");
             Scanner input8 = new Scanner(System.in);
             stock = Integer.parseInt(input8.nextLine());
