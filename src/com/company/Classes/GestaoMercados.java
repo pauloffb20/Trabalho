@@ -87,11 +87,22 @@ public class GestaoMercados {
         input4.hasNext();
         name = String.valueOf(input4.next());
 
-        System.out.println("Cliente:");
-        Scanner input = new Scanner(System.in);
-        input.hasNext();
-        cliente = Integer.parseInt(input.next());
-        clientes.addToRear(cliente);
+        System.out.println("1- Adicionar cliente");
+        System.out.println("2- Não adicionar");
+        Scanner input5 = new Scanner(System.in);
+        int choice = input5.nextInt();
+
+        while(choice != 2){
+            System.out.println("Cliente:");
+            Scanner input1 = new Scanner(System.in);
+            input1.hasNext();
+            cliente = Integer.parseInt(input1.next());
+            clientes.addToRear(cliente);
+            System.out.println("Adicionar mercado - 1");
+            System.out.println("Não adicionar - 2");
+            input5.hasNext();
+            choice = input5.nextInt();
+        }
 
         Mercado novoMercado = new Mercado(name, tipo, clientes);
         network.addVertex(novoMercado);

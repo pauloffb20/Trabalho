@@ -77,6 +77,13 @@ public class GestãoArmazem {
                     Scanner input3 = new Scanner(System.in);
                     input3.hasNext();
                     choice3 = Integer.parseInt(input3.next());
+
+                    while (choice3 > armazem.getCapacidade()){
+                        System.out.println("Stock acima da capacidade! Defina um stock:");
+                        Scanner input8 = new Scanner(System.in);
+                        choice3 = Integer.parseInt(input8.nextLine());
+                    }
+
                     armazem.setStock(choice3);
                     choice4 = 4;
                     break;
@@ -87,7 +94,7 @@ public class GestãoArmazem {
     }
 
     public void addStorage(){
-        int choice, choice2;
+        int cap, stock;
         String name, tipo = "Armazém";
 
         System.out.println("Nome:");
@@ -98,13 +105,20 @@ public class GestãoArmazem {
         System.out.println("capacidade:");
         Scanner input6 = new Scanner(System.in);
         input6.hasNext();
-        choice2 = Integer.parseInt(input6.next());
+        cap = Integer.parseInt(input6.next());
 
         System.out.println("Stock:");
         Scanner input7 = new Scanner(System.in);
         input7.hasNext();
-        choice = Integer.parseInt(input7.next());
-        Armazem novoarmazem = new Armazem(name, tipo, choice2, choice);
+        stock = Integer.parseInt(input7.next());
+
+        while (cap < stock){
+            System.out.println("Stock acima da capacidade! Defina um stock:");
+            Scanner input8 = new Scanner(System.in);
+            stock = Integer.parseInt(input8.nextLine());
+        }
+
+        Armazem novoarmazem = new Armazem(name, tipo, cap, stock);
         network.addVertex(novoarmazem);
     }
 
