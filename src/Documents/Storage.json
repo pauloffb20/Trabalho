@@ -1,0 +1,15 @@
+{
+  "local_name": "Empresa",
+  "type": "Sede",
+  "capacidade": 500,
+  "stock": 420,
+  "clientes": {
+    "list": [
+      40,
+      50,
+      25,
+      20,
+      80
+    ]
+  }
+}
