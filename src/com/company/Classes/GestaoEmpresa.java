@@ -193,4 +193,33 @@ public class GestaoEmpresa<T> {
         }
         return null;
     }
+
+
+    public void seeMarketsOrStorages(){
+        int choice;
+        System.out.println("Qual quer ver?");
+        System.out.println("1- Mercados");
+        System.out.println("2- Armazens");
+        System.out.println("3- Vendedores");
+        Scanner input = new Scanner(System.in);
+        choice = Integer.parseInt(input.next());
+        while (choice != 4) {
+            switch (choice) {
+                case 1:
+                    printMarkets();
+                    choice = 5;
+                    break;
+                case 2:
+                    printStorages();
+                    choice = 5;
+                    break;
+                case 3:
+                    gestor.printSellersToShow();
+                    choice = 5;
+                    break;
+                default:
+                    return;
+            }
+        }
+    }
 }

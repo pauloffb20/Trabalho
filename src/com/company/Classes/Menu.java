@@ -25,7 +25,7 @@ public class Menu {
     public void run() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
         int choice = 0;
         System.out.println("Welcome!");
-        while (choice != 15) {
+        while (choice != 11) {
             choice = initialMenu();
             switch (choice) {
                 case 1:
@@ -36,30 +36,27 @@ public class Menu {
                     System.out.println(gestaoEmpresa.toString());
                     break;
                 case 3:
-                    gestor.printSellersToShow();
-                    break;
-                case 4:
                     gestaoVendedores.changeSeller();
                     break;
-                case 5:
+                case 4:
                     writter.exports();
                     break;
-                case 6:
+                case 5:
                     gestaoVendedores.addSeller();
                     break;
-                case 7:
+                case 6:
                     printGraph();
                     break;
-                case 8:
+                case 7:
                     gestaoEmpresa.AddOrSetStorage();
                     break;
-                case 9:
+                case 8:
                     gestaoEmpresa.AddOrSetMarkets();
                     break;
-                case 10:
-                    seeMarketsOrStorages();
+                case 9:
+                    gestaoEmpresa.seeMarketsOrStorages();
                     break;
-                case 11:
+                case 10:
                     gestaoEmpresa.addEdge();
                     break;
                 default:
@@ -109,41 +106,17 @@ public class Menu {
             System.out.println("Escolha uma das opções:");
             System.out.println("-------------------------\n");
             System.out.println("1 - Importar documento"); //funcional!!
-            System.out.println("2 - Ver info da empresa"); //colocar grafo em vez de lista
-            System.out.println("3 - Ver vendedores"); //funcional!!
-            System.out.println("4 - Atualizar vendedor ou atribuir lista"); //funcional!!
-            System.out.println("5 - Exports"); //funcional vendedores, ver melhor empresa, storages e mercados
-            System.out.println("6 - Adicionar vendedor"); //funcional!!
-            System.out.println("7 - Mostrar Network"); // funcional!!
-            System.out.println("8 - Adicionar ou alterar Armazém"); //funcional!! Colocar um toString melhor
-            System.out.println("9 - Adicionar ou alterar mercado"); // funcional!! Colocar toString melhor + adicionar + clientes no adicionar
-            System.out.println("10- Ver mercados ou armazéns");// funcional!!
-            System.out.println("11- Adicionar caminho");
+            System.out.println("2 - Ver info da empresa"); //colocar caminhos
+            System.out.println("3 - Atualizar vendedor ou atribuir lista"); //funcional!!
+            System.out.println("4 - Exports"); //funcional vendedores!! ver melhor empresa, storages e mercados
+            System.out.println("5 - Adicionar vendedor"); //funcional!!
+            System.out.println("6 - Mostrar Network"); // funcional!!
+            System.out.println("7 - Adicionar ou alterar Armazém"); //funcional!!
+            System.out.println("8 - Adicionar ou alterar mercado"); // funcional!!
+            System.out.println("9- Ver mercados ,armazéns ou vendedores");// funcional!!
+            System.out.println("10- Adicionar caminho"); // checar melhor esta classe
             choice = input.next();
         return Integer.valueOf(choice);
-    }
-
-    public void seeMarketsOrStorages(){
-        int choice;
-        System.out.println("Qual quer ver?");
-        System.out.println("1- Mercados");
-        System.out.println("2- Armazens");
-        Scanner input = new Scanner(System.in);
-        choice = Integer.parseInt(input.next());
-        while (choice != 3) {
-            switch (choice) {
-                case 1:
-                    gestaoEmpresa.printMarkets();
-                    choice = 3;
-                    break;
-                case 2:
-                    gestaoEmpresa.printStorages();
-                    choice = 3;
-                    break;
-                default:
-                    return;
-            }
-        }
     }
 
     public void printGraph() throws EmptyException {
