@@ -14,12 +14,14 @@ public class Menu {
     private Gestor gestor;
     private Writter writter;
     private GestaoVendedores gestaoVendedores;
+    private GestãoArmazem gestãoArmazem;
 
     public Menu() {
         this.gestaoEmpresa = new GestaoEmpresa();
         this.gestor = new Gestor(gestaoEmpresa.getVendedors());
         this.writter = new Writter(gestaoEmpresa);
         this.gestaoVendedores = new GestaoVendedores(gestaoEmpresa);
+        this.gestãoArmazem = new GestãoArmazem(gestaoEmpresa.getNetworkX());
     }
 
     public void run() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
@@ -39,7 +41,7 @@ public class Menu {
                     gestaoVendedores.changeSeller();
                     break;
                 case 4:
-                    writter.exports();
+                    exports();
                     break;
                 case 5:
                     gestaoVendedores.addSeller();
@@ -127,4 +129,33 @@ public class Menu {
             System.out.println(i.next());
         }
     }
+
+    public void exports() throws IOException {
+        int choice;
+        System.out.println("Qual item quer exportar?");
+        System.out.println("1- Empresa");
+        System.out.println("2- User");
+        System.out.println("3-Storage");
+        Scanner input = new Scanner(System.in);
+        choice = Integer.parseInt(input.next());
+        while (choice != 4) {
+            switch (choice) {
+                case 1:
+                    gestaoEmpresa.exportEnterprise(gestaoEmpresa);
+                    choice = 4;
+                    break;
+                case 2:
+                    gestaoVendedores.exportUser();
+                    choice = 4;
+                    break;
+                case 3:
+                    gestãoArmazem.exportArmazem();
+                    choice = 4;
+                    break;
+                default:
+                    return;
+            }
+        }
+    }
+
 }

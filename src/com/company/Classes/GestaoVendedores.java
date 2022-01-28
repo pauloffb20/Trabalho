@@ -4,16 +4,19 @@ import com.company.Estruturas.ArrayUnorderedList;
 import com.company.Estruturas.NoComparableException;
 import com.company.Models.Vendedor;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GestaoVendedores {
 
     private GestaoEmpresa gestaoEmpresa;
     private Gestor gestor;
+    private Writter writter;
 
     public GestaoVendedores(GestaoEmpresa gestaoEmpresa){
         this.gestaoEmpresa = gestaoEmpresa;
         this.gestor = new Gestor(gestaoEmpresa.getVendedors());
+        this.writter = new Writter(gestaoEmpresa);
     }
 
     public void changeSeller() {
@@ -78,5 +81,16 @@ public class GestaoVendedores {
         gestaoEmpresa.addVendedor(vendedor);
     }
 
+    public void exportUser() throws IOException {
+        int sellectUser;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Qual utilizador quer exportar?");
+        System.out.println("-------------------------\n");
+        gestor.printSellers();
+        ArrayUnorderedList<Vendedor> vendedores = gestaoEmpresa.getVendedors();
+        sellectUser = Integer.parseInt(input.nextLine());
+        Vendedor vendedor = vendedores.getIndex(sellectUser);
+        writter.appendPersonToFile(vendedor);
+    }
 
 }

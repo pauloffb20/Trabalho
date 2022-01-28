@@ -1,15 +1,21 @@
 package com.company.Classes;
+import com.company.Estruturas.ArrayUnorderedList;
 import com.company.Models.Armazem;
 import com.company.Models.LocalX;
 import com.company.Estruturas.Network;
+import com.company.Models.Vendedor;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GestãoArmazem {
 
     private Network<LocalX> network;
+    private Writter writter;
 
     public GestãoArmazem(Network<LocalX> network){
         this.network = network;
+        this.writter = new Writter();
     }
 
     public void printStorages() {
@@ -156,5 +162,17 @@ public class GestãoArmazem {
                     return;
             }
         }
+    }
+
+    public void exportArmazem() throws IOException {
+        int sellectStorage;
+        Object[] locais = network.getVertices();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Qual armazém quer exportar?");
+        System.out.println("-------------------------\n");
+        printStorages();
+        sellectStorage = Integer.parseInt(input.nextLine());
+        Armazem armazem = (Armazem) locais[sellectStorage];
+        writter.appendStorage(armazem);
     }
 }

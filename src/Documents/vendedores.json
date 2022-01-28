@@ -1,11 +1,11 @@
 {
-  "nome": "Vendedor 1",
-  "id": 1,
-  "capacidade": 250,
+  "nome": "Vendedor 2",
+  "id": 2,
+  "capacidade": 200,
   "mercados": {
     "list": [
-      "Mercado 1",
       "...",
+      null,
       null,
       null,
       null

@@ -16,6 +16,7 @@ public class GestaoEmpresa<T> {
     private ArrayUnorderedList<Caminho> paths;
     private Gestor gestor;
     private Network<LocalX> networkX;
+    private Writter writter;
 
     public GestaoEmpresa() {
         this.vendedores = new ArrayUnorderedList<>();
@@ -23,6 +24,7 @@ public class GestaoEmpresa<T> {
         this.paths = new ArrayUnorderedList<>();
         this.networkX = new Network<>();
         this.gestor = new Gestor(vendedores);
+        this.writter = new Writter();
     }
 
     public void addVendedor(Vendedor m) throws NoComparableException {
@@ -40,6 +42,11 @@ public class GestaoEmpresa<T> {
     //public ArrayUnorderedList<Local> getLocais() {
      //   return locais;
     //}
+
+    public void exportEnterprise(GestaoEmpresa gestaoEmpresa) throws IOException {
+        GestaoEmpresa gestaoEmpresa1 = gestaoEmpresa;
+        writter.appendEnterprise(gestaoEmpresa1);
+    }
 
     public ArrayUnorderedList<Vendedor> getVendedors() {
         return vendedores;
