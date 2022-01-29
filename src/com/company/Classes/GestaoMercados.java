@@ -1,5 +1,4 @@
 package com.company.Classes;
-import com.company.Models.Armazem;
 import com.company.Models.LocalX;
 import com.company.Models.Mercado;
 import com.company.Estruturas.ArrayUnorderedList;

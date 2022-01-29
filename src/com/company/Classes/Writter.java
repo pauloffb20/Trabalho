@@ -1,5 +1,4 @@
 package com.company.Classes;
-import com.company.Estruturas.ArrayUnorderedList;
 import com.company.Models.Armazem;
 import com.company.Models.Mercado;
 import com.company.Models.Vendedor;
@@ -7,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Writter {
     Gson gson = new Gson();

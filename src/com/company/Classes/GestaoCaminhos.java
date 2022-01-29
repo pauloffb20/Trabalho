@@ -1,13 +1,10 @@
 package com.company.Classes;
-import com.company.Estruturas.ArrayUnorderedList;
 import com.company.Estruturas.EmptyException;
 import com.company.Estruturas.NotFoundException;
 import com.company.Models.Caminho;
 import com.company.Models.LocalX;
 import com.company.Estruturas.Network;
-
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class GestaoCaminhos {

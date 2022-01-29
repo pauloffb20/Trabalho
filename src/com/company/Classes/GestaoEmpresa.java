@@ -196,12 +196,20 @@ public class GestaoEmpresa<T> {
     public void removeEdge() throws EmptyException, NotFoundException {
         GestaoCaminhos gestaoCaminhos = new GestaoCaminhos(networkX);
         Caminho caminho = gestaoCaminhos.removeEdge();
+        boolean flag = false;
 
-        for(int i = 0; i<paths.size(); i++){
-            if(caminho.getDe().equals(paths.getIndex(i).getDe()) &&
-                    caminho.getPara().equals(paths.getIndex(i).getPara())){
-               paths.removeByIndex(i);
+        for(int i = 0; i< paths.size(); i++){
+                if(caminho.getDe().equals(paths.getIndex(i).getDe()) &&
+                    caminho.getPara().equals(paths.getIndex(i).getPara())) {
+                    paths.removeByIndex(i);
+                    flag = true;
+                }
             }
+
+        if(flag == true){
+            System.out.println("apagado");
+        } else {
+            System.out.println("caminho inexistente");
         }
     }
 
