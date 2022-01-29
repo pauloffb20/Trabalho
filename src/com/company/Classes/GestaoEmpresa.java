@@ -17,6 +17,7 @@ public class GestaoEmpresa<T> {
     private Gestor gestor;
     private Network<LocalX> networkX;
     private Writter writter;
+    private GestaoCaminhos gestaoCaminhos;
 
     public GestaoEmpresa() {
         this.vendedores = new ArrayUnorderedList<>();
@@ -25,27 +26,22 @@ public class GestaoEmpresa<T> {
         this.networkX = new Network<>();
         this.gestor = new Gestor(vendedores);
         this.writter = new Writter();
+        this.gestaoCaminhos = new GestaoCaminhos(networkX);
     }
 
     public void addVendedor(Vendedor m) throws NoComparableException {
-        this.vendedores.addToRear(m);
+        this.vendedores.addToRear(m); }
+
+    public void addCaminho(Caminho c){
+        this.paths.addToRear(c);
     }
-
-   // public void addLocal(Local m) throws NoComparableException {
-     //   this.locais.addToRear(m);
-   // }
-
-    public void addCaminho(Caminho m) throws NoComparableException {
-        this.paths.addToRear(m);
-    }
-
-    //public ArrayUnorderedList<Local> getLocais() {
-     //   return locais;
-    //}
 
     public void exportEnterprise(GestaoEmpresa gestaoEmpresa) throws IOException {
         GestaoEmpresa gestaoEmpresa1 = gestaoEmpresa;
         writter.appendEnterprise(gestaoEmpresa1);
+    }
+    public ArrayUnorderedList<Caminho> getPaths() {
+        return paths;
     }
 
     public ArrayUnorderedList<Vendedor> getVendedors() {
@@ -141,6 +137,7 @@ public class GestaoEmpresa<T> {
                 if (inicio.getLocal_name() != null && fim.getLocal_name() != null) {
                     networkX.addEdge(inicio, fim, distancia);
                 }
+                this.addCaminho(caminho);
             }
         }
     }
@@ -162,6 +159,11 @@ public class GestaoEmpresa<T> {
             s += "\n" + networkX.getVertex(i) + "\n";
         }
         s += "\n" + "*-------------------------------*\n";
+
+        for (Caminho caminho: paths) {
+            s += "\n" + caminho.toString() + "\n";
+        }
+
         return s;
     }
 
@@ -187,7 +189,20 @@ public class GestaoEmpresa<T> {
 
     public void addEdge(){
         GestaoCaminhos gestaoCaminhos = new GestaoCaminhos(networkX);
-        networkX = gestaoCaminhos.addEdge();
+        Caminho caminho = gestaoCaminhos.addEdge();
+        paths.addToRear(caminho);
+    }
+
+    public void removeEdge() throws EmptyException, NotFoundException {
+        GestaoCaminhos gestaoCaminhos = new GestaoCaminhos(networkX);
+        Caminho caminho = gestaoCaminhos.removeEdge();
+
+        for(int i = 0; i<paths.size(); i++){
+            if(caminho.getDe().equals(paths.getIndex(i).getDe()) &&
+                    caminho.getPara().equals(paths.getIndex(i).getPara())){
+               paths.removeByIndex(i);
+            }
+        }
     }
 
     public LocalX findLocalByName(String nome){
@@ -200,7 +215,6 @@ public class GestaoEmpresa<T> {
         }
         return null;
     }
-
 
     public void seeMarketsOrStorages(){
         int choice;
@@ -228,5 +242,13 @@ public class GestaoEmpresa<T> {
                     return;
             }
         }
+    }
+
+    public String printPaths(){
+        String s = "";
+        for (Caminho caminho: paths) {
+            s += "\n" + caminho.toString() + "\n";
+        }
+        return s;
     }
 }

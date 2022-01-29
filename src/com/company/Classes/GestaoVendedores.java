@@ -51,15 +51,15 @@ public class GestaoVendedores {
 
         System.out.println("ID:");
         Scanner input3 = new Scanner(System.in);
-        id = Long.parseLong(input3.next());
+        id = Long.parseLong(input3.nextLine());
 
         System.out.println("Name:");
         Scanner input = new Scanner(System.in);
-        nome = input.next();
+        nome = input.nextLine();
 
         System.out.println("Capacidade:");
         Scanner input2 = new Scanner(System.in);
-        capacidade = Long.parseLong(input2.next());
+        capacidade = Long.parseLong(input2.nextLine());
 
         ArrayUnorderedList<String> mercados = new ArrayUnorderedList<String>();
         System.out.println("Adicionar mercado - 1");
@@ -70,11 +70,10 @@ public class GestaoVendedores {
         while(choice != 2){
             System.out.println("Mercados:");
             Scanner input4 = new Scanner(System.in);
-            String mercado = String.valueOf(input4.next());
+            String mercado = String.valueOf(input4.nextLine());
             mercados.addToRear(mercado);
             System.out.println("Adicionar mercado - 1");
             System.out.println("Não adicionar - 2");
-            input5.hasNext();
             choice = input5.nextInt();
         }
         vendedor = new Vendedor(id, nome, capacidade, mercados);

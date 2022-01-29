@@ -16,6 +16,7 @@ public class Menu {
     private GestaoVendedores gestaoVendedores;
     private GestãoArmazem gestãoArmazem;
     private GestaoMercados gestaoMercados;
+    private GestaoCaminhos gestaoCaminhos;
 
     public Menu() {
         this.gestaoEmpresa = new GestaoEmpresa();
@@ -24,6 +25,7 @@ public class Menu {
         this.gestaoVendedores = new GestaoVendedores(gestaoEmpresa);
         this.gestãoArmazem = new GestãoArmazem(gestaoEmpresa.getNetworkX());
         this.gestaoMercados = new GestaoMercados(gestaoEmpresa.getNetworkX());
+        this.gestaoCaminhos = new GestaoCaminhos(gestaoEmpresa);
     }
 
     public void run() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
@@ -61,7 +63,7 @@ public class Menu {
                     gestaoEmpresa.seeMarketsOrStorages();
                     break;
                 case 10:
-                    gestaoEmpresa.addEdge();
+                    gestaoCaminhos.pathMenu();
                     break;
                 default:
             }
@@ -118,7 +120,7 @@ public class Menu {
             System.out.println("7 - Adicionar ou alterar Armazém"); //funcional!!
             System.out.println("8 - Adicionar ou alterar mercado"); // funcional!!
             System.out.println("9- Ver mercados ,armazéns ou vendedores");// funcional!!
-            System.out.println("10- Adicionar caminho"); // checar melhor esta classe
+            System.out.println("10- Adicionar,remover ou listar caminhos"); // checar melhor esta classe
             choice = input.next();
         return Integer.valueOf(choice);
     }

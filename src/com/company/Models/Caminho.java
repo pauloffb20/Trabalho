@@ -4,9 +4,14 @@ public class Caminho {
 
     private String de;
     private String para;
-    private int distancia;
+    private double distancia;
 
-    public Caminho(String de, String para, int distancia){
+    public Caminho(String de, String para){
+        this.de = de;
+        this.para = para;
+    }
+
+    public Caminho(String de, String para, double distancia){
         this.de = de;
         this.para = para;
         this.distancia = distancia;
@@ -16,7 +21,7 @@ public class Caminho {
 
     }
 
-    public int getDistancia() {
+    public double getDistancia() {
         return distancia;
     }
 

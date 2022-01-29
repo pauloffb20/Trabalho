@@ -47,8 +47,7 @@ public class GestãoArmazem {
         printStorages();
         System.out.println("Escolha o armazem a alterar:");
         Scanner input = new Scanner(System.in);
-        input.hasNext();
-        choice = Integer.parseInt(input.next());
+        choice = Integer.parseInt(input.nextLine());
 
         Armazem armazem = (Armazem) locais[choice];
 
@@ -58,31 +57,28 @@ public class GestãoArmazem {
         System.out.println("3- Stock");
         System.out.println("4- Exit");
         Scanner input5 = new Scanner(System.in);
-        choice4 = Integer.parseInt(input5.next());
+        choice4 = Integer.parseInt(input5.nextLine());
 
         while (choice4 != 4) {
             switch (choice4) {
                 case 1:
                     System.out.println("Nome?");
                     Scanner input6 = new Scanner(System.in);
-                    input6.hasNext();
-                    nome = String.valueOf(input6.next());
+                    nome = String.valueOf(input6.nextLine());
                     armazem.setLocal_name(nome);
                     choice4 = 4;
                     break;
                 case 2:
                     System.out.println("Capacidade?");
                     Scanner input2 = new Scanner(System.in);
-                    input2.hasNext();
-                    choice2 = Integer.parseInt(input2.next());
+                    choice2 = Integer.parseInt(input2.nextLine());
                     armazem.setCapacidade(choice2);
                     choice4 = 4;
                     break;
                 case 3:
                     System.out.println("Quanto Stock?");
                     Scanner input3 = new Scanner(System.in);
-                    input3.hasNext();
-                    choice3 = Integer.parseInt(input3.next());
+                    choice3 = Integer.parseInt(input3.nextLine());
 
                     while (choice3 > armazem.getCapacidade() || choice3 < 0){
                         System.out.println("Stock acima da capacidade! Defina um stock:");
@@ -105,18 +101,15 @@ public class GestãoArmazem {
 
         System.out.println("Nome:");
         Scanner input4 = new Scanner(System.in);
-        input4.hasNext();
-        name = String.valueOf(input4.next());
+        name = String.valueOf(input4.nextLine());
 
         System.out.println("capacidade:");
         Scanner input6 = new Scanner(System.in);
-        input6.hasNext();
-        cap = Integer.parseInt(input6.next());
+        cap = Integer.parseInt(input6.nextLine());
 
         System.out.println("Stock:");
         Scanner input7 = new Scanner(System.in);
-        input7.hasNext();
-        stock = Integer.parseInt(input7.next());
+        stock = Integer.parseInt(input7.nextLine());
 
         while (cap < stock || stock < 0){
             System.out.println("Stock acima da capacidade! Defina um stock:");

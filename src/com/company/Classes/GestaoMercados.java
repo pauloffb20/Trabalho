@@ -39,16 +39,15 @@ public class GestaoMercados {
 
     public void setMarket(){
         Object[] locais = network.getVertices();
-        int choice, choice4 = 0, cliente;
+        int choice, choice4 = 0, cliente, choice2;
         String nome;
         printMarkets();
         System.out.println("Escolha o mercado a alterar:");
         Scanner input = new Scanner(System.in);
-        input.hasNext();
         choice = Integer.parseInt(input.next());
         Mercado mercado = (Mercado) locais[choice];
 
-        while (choice4 != 3) {
+        while (choice4 != 2) {
             System.out.println("Qual item quer alterar?");
             System.out.println("1- Nome");
             System.out.println("2- Lista de clientes");
@@ -60,18 +59,29 @@ public class GestaoMercados {
                 case 1:
                     System.out.println("Nome?");
                     Scanner input6 = new Scanner(System.in);
-                    input6.hasNext();
-                    nome = String.valueOf(input6.next());
+                    nome = String.valueOf(input6.nextLine());
                     mercado.setLocal_name(nome);
                     choice4 = 3;
                     break;
                 case 2:
-                    ArrayUnorderedList<Integer> clientes = mercado.getClientes();
-                    System.out.println("Clientes?");
+                    ArrayUnorderedList<Integer> clientes = new ArrayUnorderedList<>();
+
+                    System.out.println("1- Adicionar cliente");
+                    System.out.println("2- Não adicionar");
                     Scanner input7 = new Scanner(System.in);
-                    input7.hasNext();
-                    cliente = Integer.parseInt(input.next());
-                    clientes.addToRear(cliente);
+                    choice2 = input7.nextInt();
+
+                    while(choice2 != 2){
+                        System.out.println("Cliente:");
+                        Scanner input1 = new Scanner(System.in);
+                        cliente = Integer.parseInt(input1.nextLine());
+                        clientes.addToRear(cliente);
+                        System.out.println("Adicionar cliente - 1");
+                        System.out.println("Não adicionar - 2");
+                        choice2 = input7.nextInt();
+                    }
+
+                    mercado.setClientes(clientes);
                     break;
                 default:
                     return;
@@ -86,8 +96,7 @@ public class GestaoMercados {
 
         System.out.println("Nome:");
         Scanner input4 = new Scanner(System.in);
-        input4.hasNext();
-        name = String.valueOf(input4.next());
+        name = String.valueOf(input4.nextLine());
 
         System.out.println("1- Adicionar cliente");
         System.out.println("2- Não adicionar");
@@ -97,12 +106,10 @@ public class GestaoMercados {
         while(choice != 2){
             System.out.println("Cliente:");
             Scanner input1 = new Scanner(System.in);
-            input1.hasNext();
-            cliente = Integer.parseInt(input1.next());
+            cliente = Integer.parseInt(input1.nextLine());
             clientes.addToRear(cliente);
-            System.out.println("Adicionar mercado - 1");
+            System.out.println("Adicionar cliente - 1");
             System.out.println("Não adicionar - 2");
-            input5.hasNext();
             choice = input5.nextInt();
         }
 
@@ -116,8 +123,7 @@ public class GestaoMercados {
         System.out.println("2- Adicionar mercado");
         System.out.println("3 - exit");
         Scanner input = new Scanner(System.in);
-        input.hasNext();
-        menu = Integer.parseInt(input.next());
+        menu = Integer.parseInt(input.nextLine());
 
         while (menu != 3) {
             switch (menu) {
@@ -127,8 +133,7 @@ public class GestaoMercados {
                     System.out.println("2- Adicionar mercado");
                     System.out.println("3 - exit");
                     Scanner input1 = new Scanner(System.in);
-                    input1.hasNext();
-                    menu = Integer.parseInt(input1.next());
+                    menu = Integer.parseInt(input1.nextLine());
                     break;
                 case 2:
                     addMarket();
@@ -136,8 +141,7 @@ public class GestaoMercados {
                     System.out.println("2- Adicionar mercado");
                     System.out.println("3 - exit");
                     Scanner input2 = new Scanner(System.in);
-                    input2.hasNext();
-                    menu = Integer.parseInt(input2.next());
+                    menu = Integer.parseInt(input2.nextLine());
                     break;
                 default:
                     return;
