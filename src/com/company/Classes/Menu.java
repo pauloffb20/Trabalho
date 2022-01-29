@@ -15,6 +15,7 @@ public class Menu {
     private Writter writter;
     private GestaoVendedores gestaoVendedores;
     private GestãoArmazem gestãoArmazem;
+    private GestaoMercados gestaoMercados;
 
     public Menu() {
         this.gestaoEmpresa = new GestaoEmpresa();
@@ -22,6 +23,7 @@ public class Menu {
         this.writter = new Writter(gestaoEmpresa);
         this.gestaoVendedores = new GestaoVendedores(gestaoEmpresa);
         this.gestãoArmazem = new GestãoArmazem(gestaoEmpresa.getNetworkX());
+        this.gestaoMercados = new GestaoMercados(gestaoEmpresa.getNetworkX());
     }
 
     public void run() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
@@ -134,28 +136,32 @@ public class Menu {
         int choice;
         System.out.println("Qual item quer exportar?");
         System.out.println("1- Empresa");
-        System.out.println("2- User");
-        System.out.println("3-Storage");
+        System.out.println("2- Vendedor");
+        System.out.println("3- Armazém");
+        System.out.println("4- Mercado");
         Scanner input = new Scanner(System.in);
         choice = Integer.parseInt(input.next());
-        while (choice != 4) {
+        while (choice != 5) {
             switch (choice) {
                 case 1:
                     gestaoEmpresa.exportEnterprise(gestaoEmpresa);
-                    choice = 4;
+                    choice = 5;
                     break;
                 case 2:
                     gestaoVendedores.exportUser();
-                    choice = 4;
+                    choice = 5;
                     break;
                 case 3:
                     gestãoArmazem.exportArmazem();
-                    choice = 4;
+                    choice = 5;
+                    break;
+                case 4:
+                    gestaoMercados.exportMercado();
+                    choice = 5;
                     break;
                 default:
                     return;
             }
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package com.company.Classes;
 import com.company.Estruturas.ArrayUnorderedList;
 import com.company.Models.Armazem;
+import com.company.Models.Mercado;
 import com.company.Models.Vendedor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,7 +14,7 @@ public class Writter {
      private GestaoEmpresa gestaoEmpresa;
      private Gestor gestor;
      private String fileNamePath  = "src/Documents/vendedores.json",
-            storagePath = "src/Documents/Storage.json", enterprise = "src/Documents/enterprise.json";
+            storagePath = "src/Documents/Storage.json", enterprise = "src/Documents/enterprise.json", marketPath = "src/Documents/Market.json";
 
      public Writter(){ }
 
@@ -52,6 +53,17 @@ public class Writter {
         builder.setPrettyPrinting();
         Gson gson = builder.create();
         FileWriter writer = new FileWriter(this.storagePath);
+        gson.toJson(local1, writer);
+        writer.flush();
+        writer.close();
+    }
+
+    public void appendMarket(Mercado local) throws IOException {
+        Mercado local1 = local;
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        FileWriter writer = new FileWriter(this.marketPath);
         gson.toJson(local1, writer);
         writer.flush();
         writer.close();

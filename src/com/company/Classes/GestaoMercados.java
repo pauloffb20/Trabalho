@@ -1,16 +1,19 @@
 package com.company.Classes;
+import com.company.Models.Armazem;
 import com.company.Models.LocalX;
 import com.company.Models.Mercado;
 import com.company.Estruturas.ArrayUnorderedList;
 import com.company.Estruturas.Network;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GestaoMercados {
 
+    private Writter writter;
     private Network<LocalX> network;
-
     public GestaoMercados(Network<LocalX> localNetwork){
         this.network = localNetwork;
+        this.writter = new Writter();
     }
 
     public void printMarkets() {
@@ -38,7 +41,6 @@ public class GestaoMercados {
         Object[] locais = network.getVertices();
         int choice, choice4 = 0, cliente;
         String nome;
-
         printMarkets();
         System.out.println("Escolha o mercado a alterar:");
         Scanner input = new Scanner(System.in);
@@ -109,9 +111,7 @@ public class GestaoMercados {
     }
 
     public void AddOrSetMarkets() {
-
         int menu;
-
         System.out.println("1- Mudar Mercado");
         System.out.println("2- Adicionar mercado");
         System.out.println("3 - exit");
@@ -143,5 +143,17 @@ public class GestaoMercados {
                     return;
             }
         }
+    }
+
+    public void exportMercado() throws IOException {
+        int sellectMarket;
+        Object[] locais = network.getVertices();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Qual mercado quer exportar?");
+        System.out.println("-------------------------\n");
+        printMarkets();
+        sellectMarket = Integer.parseInt(input.nextLine());
+        Mercado mercado = (Mercado) locais[sellectMarket];
+        writter.appendMarket(mercado);
     }
 }
